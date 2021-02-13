@@ -100,9 +100,10 @@ export default function Create() {
 				url: formData.url,
 			})
 			.then(response => { 
-				console.log(response)
+				window.location.reload();
 			})
 			.catch(error => {
+				console.log(error.response.data);
 			});
 	};
 
