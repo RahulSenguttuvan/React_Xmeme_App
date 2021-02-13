@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Layout from './components/Layout';
+import LayoutLoadingComponent from './components/LayoutLoading';
+import Create from './components/create';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	const LayoutLoading = LayoutLoadingComponent(Layout);
+	const [appState, setAppState] = useState({
+		loading: false,
+		layout: null,
+	});
 
+	useEffect(() => {
+		setAppState({ loading: true });
+		const apiUrl = `https://rahulsenguttuvan-xmeme-app.herokuapp.com/memes/`;
+		fetch(apiUrl)
+			.then((data) => data.json()) 
+			.then((layout) => {
+				setAppState({ loading: false, layout: layout });
+			});
+	}, [setAppState]);
+	return (
+		<div className="App">
+      <Create />
+      <h1>Latest Meme's</h1>
+			<LayoutLoading isLoading={appState.loading} layout={appState.layout} />
+		</div>
+	);
+}
 export default App;
