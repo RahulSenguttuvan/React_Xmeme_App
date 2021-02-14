@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://127.0.0.1:8081/memes/';
+const baseURL = 'https://rahulsenguttuvan-xmeme-app.herokuapp.com/memes/';
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,

@@ -13,7 +13,7 @@ function App() {
 
 	useEffect(() => {
 		setAppState({ loading: true });
-		const apiUrl = `http://127.0.0.1:8081/memes/`;
+		const apiUrl = `https://rahulsenguttuvan-xmeme-app.herokuapp.com/memes/`;
 		fetch(apiUrl)
 			.then((data) => data.json()) 
 			.then((layout) => {
