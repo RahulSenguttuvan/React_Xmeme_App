@@ -62,8 +62,8 @@ export default function FormDialog(props){
         .catch(error => { // Getting appropriate error responses. 
           updateFormData({
             ...formData,
-            ['caption']: '',
-            ['url']: '',
+            ['caption']: formData.caption,
+            ['url']: formData.url,
             ['snackState']:error.response.data,
           });
           handleError()
@@ -127,7 +127,7 @@ export default function FormDialog(props){
                 />
             </form>
         </DialogContent>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleErrorClose}>
+        <Snackbar open={open} onClose={handleErrorClose}>
 						<Alert onClose={handleErrorClose} severity="error">
 							{formData.snackState}
 						</Alert>
