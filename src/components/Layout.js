@@ -52,7 +52,7 @@ const Layout = (props) => {
 									<CardMedia
 										className={classes.cardMedia} 
 										// Checking if image url ends in either a png or jpeg format. If not then, return 404 error image
-										image={ ( data.url.substring(data.url.lastIndexOf('.') + 1).includes("png") || data.url.substring(data.url.lastIndexOf('.') + 1).includes("jpeg") ) ? data.url : ( "https://webhostingmedia.net/wp-content/uploads/2018/01/http-error-404-not-found.png")  }
+										image = { ( data.url.substring(data.url.lastIndexOf('.') + 1).includes("png") || data.url.substring(data.url.lastIndexOf('.') + 1).includes("jpeg") ) ? data.url :  "https://webhostingmedia.net/wp-content/uploads/2018/01/http-error-404-not-found.png"  }
 										title="Image title"
 									/>
 									<CardContent className={classes.cardContent}>

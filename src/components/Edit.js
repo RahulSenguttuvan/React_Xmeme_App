@@ -16,7 +16,7 @@ function Alert(props) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 export default function FormDialog(props){
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState({DIALOGUE_BOX:false,ALERT:false});
     // Getting data sent from Layout component. 
     const { data } = props;
     const initialFormData = Object.freeze({
@@ -72,21 +72,29 @@ export default function FormDialog(props){
 
 // Set state of dialogue box 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen({
+    ['DIALOGUE_BOX']:true,
+    });
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen({
+      ['DIALOGUE_BOX']:false,
+      });
   };
 
   const handleError = () => {
-		setOpen(true);
+		setOpen({
+      ['ALERT']:true,
+      });
 	};
 	  const handleErrorClose = (event, reason) => {
 		if (reason === 'clickaway') {
 		  return;
 		}
-		setOpen(false);
+    setOpen({
+      ['ALERT']:false,
+      });
 	  };
 
   return (
@@ -94,7 +102,7 @@ export default function FormDialog(props){
       <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Edit
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open.DIALOGUE_BOX} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Edit</DialogTitle>
         <DialogContent>
           <DialogContentText> 
@@ -127,7 +135,7 @@ export default function FormDialog(props){
                 />
             </form>
         </DialogContent>
-        <Snackbar open={open} onClose={handleErrorClose}>
+        <Snackbar open={open.ALERT} onClose={handleErrorClose}>
 						<Alert onClose={handleErrorClose} severity="error">
 							{formData.snackState}
 						</Alert>
