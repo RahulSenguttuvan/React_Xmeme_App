@@ -103,7 +103,17 @@ export default function Create() {
 				window.location.reload();
 			})
 			.catch(error => {
-				console.log(error.response.data);
+				updateFormData({
+					...formData,
+					'name':'',
+					'caption':'',
+					'url':'',
+					'formErrors': { name:'', caption:'', url:''},
+					'nameValid': false,
+					'captionValid': false,
+					'urlValid': false,
+					'formValid' : false
+				});
 			});
 	};
 
