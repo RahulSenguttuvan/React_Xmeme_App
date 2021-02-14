@@ -9,14 +9,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 export default function FormDialog(props){
     const [open, setOpen] = useState(false);
     // Getting data sent from Layout component. 
     const { data } = props;
     const initialFormData = Object.freeze({
 		url: '',
-    caption: ''
+    caption: '',
+    snackState:'',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
   
@@ -54,7 +60,13 @@ export default function FormDialog(props){
           window.location.reload() // Reload page to see change 
         })
         .catch(error => { // Getting appropriate error responses. 
-          console.log(error.response.data);
+          updateFormData({
+            ...formData,
+            ['caption']: '',
+            ['url']: '',
+            ['snackState']:error.response.data,
+          });
+          handleError()
         });
 	};
 
@@ -66,6 +78,16 @@ export default function FormDialog(props){
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleError = () => {
+		setOpen(true);
+	};
+	  const handleErrorClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+		setOpen(false);
+	  };
 
   return (
     <div>
@@ -105,6 +127,11 @@ export default function FormDialog(props){
                 />
             </form>
         </DialogContent>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleErrorClose}>
+						<Alert onClose={handleErrorClose} severity="error">
+							{formData.snackState}
+						</Alert>
+				</Snackbar>
         <DialogActions>
           <Button onClick={handleSubmit} color="primary">
             Submit

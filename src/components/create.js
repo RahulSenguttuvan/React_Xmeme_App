@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
 import axiosInstance from '../axios';
-import validator from 'validator'
 //MaterialUI
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,6 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -38,47 +43,10 @@ export default function Create() {
 		name: '',
 		caption: '',
 		url: '',
-		formErrors: { name:'', caption:'', url:''},
-		nameValid: false,
-		captionValid: false,
-		urlValid: false,
-		formValid:false
+		snackState: '',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
-
-	const validateField = (fieldName, value) => {
-		let fieldValidationErrors = formData.formErrors;
-		let nameValid = formData.nameValid;
-		let captionValid = formData.captionValid;
-		let urlValid = formData.urlValid;
-		switch(fieldName) {
-			case 'name':
-				nameValid = value.length >= 1;
-				//fieldValidationErrors.name = nameValid ? '' : ' is invalid';
-				break;
-			case 'url':
-				urlValid = validator.isURL(value);
-				//fieldValidationErrors.url = urlValid ? '' : ' is invalid';
-				break;
-			case 'caption':
-				captionValid = value.length >= 1;
-				//fieldValidationErrors.caption = captionValid ? '': ' is too short';
-				break;
-			default:
-				break;
-		}
-		updateFormData({
-            ...formData,
-            'formErrors': fieldValidationErrors,
-			'nameValid': nameValid,
-			'captionValid': captionValid,
-			'urlValid': urlValid,
-			'formValid' : nameValid && captionValid && urlValid
-        });
-	  }
-	  
-	  
-
+	const [open, setOpen] = useState(false);
 	// Saving data typed into the state 
 	const handleChange = (e) => {
 		const name = e.target.name;
@@ -87,8 +55,18 @@ export default function Create() {
             ...formData,
             [e.target.name]: e.target.value.trim(),
         });
-		validateField(name, value)
+		//validateField(name, value)
 	};
+
+	const handleError = () => {
+		setOpen(true);
+	};
+	  const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+		setOpen(false);
+	  };
 	
 	// Handling the submit using axious ( Post )  Base URL is hard-coded.
 	const handleSubmit = (e) => {
@@ -103,7 +81,14 @@ export default function Create() {
 				window.location.reload();
 			})
 			.catch(error => {
-				console.log(error.response.data);
+				updateFormData({
+					...formData,
+					['name']: '',
+					['caption']: '',
+					['url']: '',
+					['snackState']:error.response.data,
+				});
+				handleError()
 			});
 	};
 
@@ -127,6 +112,7 @@ export default function Create() {
 								label="name"
 								name="name"
 								autoComplete="name"
+								value={formData.name}
 								onChange={handleChange}
 							/>
 						</Grid>
@@ -139,6 +125,7 @@ export default function Create() {
 								label="caption"
 								name="caption"
 								autoComplete="caption"
+								value={formData.caption}
 								onChange={handleChange}
 							/>
 						</Grid>
@@ -151,10 +138,16 @@ export default function Create() {
 								label="url"
 								name="url"
 								autoComplete="url"
+								value={formData.url}
 								onChange={handleChange}
 							/>
 						</Grid>
 					</Grid>
+					<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+						<Alert onClose={handleClose} severity="error">
+							{formData.snackState}
+						</Alert>
+					</Snackbar>
 					<Button
 						type="submit"
 						fullWidth
@@ -162,7 +155,6 @@ export default function Create() {
 						color="primary"
 						className={classes.submit}
 						onClick={handleSubmit}
-						disabled={!formData.formValid}
 					>
 						Submit Meme
 					</Button>
