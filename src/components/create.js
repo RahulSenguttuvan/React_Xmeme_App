@@ -42,7 +42,7 @@ export default function Create() {
 	const initialFormData = Object.freeze({
 		name: '',
 		caption: '',
-		url: 'To see your meme, please give an image endpoint(png, jpg)!',
+		url: '',
 		snackState: '',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
@@ -139,6 +139,7 @@ export default function Create() {
 								name="url"
 								autoComplete="url"
 								value={formData.url}
+								placeholder="Enter url ending in png,jpg..etc"
 								onChange={handleChange}
 							/>
 						</Grid>
