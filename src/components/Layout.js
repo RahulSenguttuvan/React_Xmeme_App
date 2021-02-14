@@ -45,7 +45,7 @@ const Layout = (props) => {
 			<Container maxWidth="md" component="main">
 				<Grid container spacing={5} alignItems="flex-end">
 				{/* Reversing map elements to display the most recent image first  */}
-					{layout.map((data) => {
+					{layout.slice(0).reverse().map((data) => {
 						return (
 							<Grid item key={data.id} xs={12} md={4}>
 								<Card className={classes.card}>
