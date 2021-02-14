@@ -36,7 +36,7 @@ export default function Create() {
 	// Declaring state using freeze to prevent change 
 	const initialFormData = Object.freeze({
 		name: '',
-		Caption: '',
+		caption: '',
 		url: '',
 		formErrors: { name:'', caption:'', url:''},
 		nameValid: false,
