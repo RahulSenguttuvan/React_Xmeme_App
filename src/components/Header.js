@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 const routeChange = () =>{ 
-    const url = "https://rahulsenguttuvan-xmeme-app.herokuapp.com/swagger-ui/";
+    const url = "http://127.0.0.1:8081/swagger-ui/";
 	window.open(url,'_blank');
   }
 
