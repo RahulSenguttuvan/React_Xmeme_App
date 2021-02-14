@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axios';
-import validator from 'validator'
 //MaterialUI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';

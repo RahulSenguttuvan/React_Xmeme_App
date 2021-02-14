@@ -42,7 +42,7 @@ export default function Create() {
 	const initialFormData = Object.freeze({
 		name: '',
 		caption: '',
-		url: '',
+		url: 'To see your meme, please give an image endpoint(png, jpg)!',
 		snackState: '',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
