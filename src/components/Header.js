@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		borderBottom: `1px solid ${theme.palette.divider}`,
 	},
 }));
+// Swagger redirect 
 const routeChange = () =>{ 
     const url = "https://rahulsenguttuvan-xmeme-app.herokuapp.com/swagger-ui/";
 	window.open(url,'_blank');
@@ -39,6 +40,7 @@ function Header() {
 					<Typography variant="h6" color="inherit" noWrap>
 						Xmeme
 					</Typography>
+					{/* Adding button for swagger documenatation */}
 					<Button variant="contained" color="secondary" className={classes.swaggerButton} onClick={routeChange}>
 						Swagger
 					</Button>

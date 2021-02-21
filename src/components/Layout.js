@@ -10,8 +10,12 @@ import Edit from './Edit';
 
 // Override style 
 const useStyles = makeStyles((theme) => ({
+	card: {
+    maxWidth: 345,
+  },
 	cardMedia: {
-		paddingTop: '70%', 
+		paddingTop: '100%', // 16:9,
+		height:0  
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
@@ -51,6 +55,7 @@ const Layout = (props) => {
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia} 
+										height="240"
 										// Checking if image url ends in either a png or jpeg format. If not then, return 404 error image
 										image = {data.url}
 										title="Image title"

@@ -77,7 +77,7 @@ export default function FormDialog(props){
   const handleClose = () => {
     setOpen(false);
   };
-
+// Set state of Error box
   const handleError = () => {
 		setOpen(true);
 	};

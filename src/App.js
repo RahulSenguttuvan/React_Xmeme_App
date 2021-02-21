@@ -10,13 +10,14 @@ function App() {
 		loading: false,
 		layout: null,
 	});
-
+	// Checking for data from the backend on load. 
 	useEffect(() => {
 		setAppState({ loading: true });
 		const apiUrl = `https://rahulsenguttuvan-xmeme-app.herokuapp.com/memes/`;
 		fetch(apiUrl)
 			.then((data) => data.json()) 
 			.then((layout) => {
+				// Setting state of loading to true if no data available in the backend, or if it's taking time
 				setAppState({ loading: false, layout: layout });
 			});
 	}, [setAppState]);

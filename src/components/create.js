@@ -81,6 +81,7 @@ export default function Create() {
 				window.location.reload();
 			})
 			.catch(error => {
+				// If invalid data is given, reset the state so data is cleared. 
 				updateFormData({
 					...formData,
 					['name']: '',
@@ -88,6 +89,7 @@ export default function Create() {
 					['url']: '',
 					['snackState']:error.response.data,
 				});
+				// Calling snakbar pop up to notify of error 
 				handleError()
 			});
 	};
