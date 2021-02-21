@@ -10,11 +10,8 @@ import Edit from './Edit';
 
 // Override style 
 const useStyles = makeStyles((theme) => ({
-	card: {
-    maxWidth: 345,
-  },
 	cardMedia: {
-		paddingTop: '56.7%%', // 16:9,
+		paddingTop: '56.25%', // 16:9
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
