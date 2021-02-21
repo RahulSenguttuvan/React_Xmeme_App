@@ -14,8 +14,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
 	cardMedia: {
-		paddingTop: '100%', // 16:9,
-		height:0  
+		paddingTop: '56.7%%', // 16:9,
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
