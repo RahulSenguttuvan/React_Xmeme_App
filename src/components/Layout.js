@@ -51,7 +51,6 @@ const Layout = (props) => {
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia} 
-										height="240"
 										// Checking if image url ends in either a png or jpeg format. If not then, return 404 error image
 										image = {data.url}
 										title="Image title"
