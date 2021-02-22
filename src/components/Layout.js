@@ -12,6 +12,8 @@ import Edit from './Edit';
 const useStyles = makeStyles((theme) => ({
 	cardMedia: {
 		paddingTop: '56.25%', // 16:9
+		width: "auto",
+		height: "auto",
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
