@@ -66,24 +66,32 @@ export default function FormDialog(props){
             ['url']: formData.url,
             ['snackState']:error.response.data,
           });
-          openSnackBar(true);
+          handleError()
         });
 	};
-  
+
+// Set state of dialogue box 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleErrorClose = (event, reason) => {
-  if (reason === 'clickaway') {
-    return;
-  }
-  openSnackBar(false);
-  };
+// Set state of Error box
+  const handleError = () => {
+		openSnackBar(true);
+	};
+	  const handleErrorClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+		openSnackBar(false);
+	  };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={ setOpen(true) }>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Edit
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -125,10 +133,10 @@ export default function FormDialog(props){
           </Button>
         </DialogActions>
         <Snackbar open={openSnack} onClose={handleErrorClose}>
-						<Alert onClose={handleErrorClose} severity="error">
-							{formData.snackState}
-						</Alert>
-				</Snackbar>
+		<Alert onClose={handleErrorClose} severity="error">
+			{formData.snackState}
+		</Alert>
+	</Snackbar>
       </Dialog>
     </div>
   );
