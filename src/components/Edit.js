@@ -16,6 +16,7 @@ function Alert(props) {
   }
 export default function FormDialog(props){
     const [open, setOpen] = useState(false);
+    const [openSnack, openSnackBar] = useState(false);
     // Getting data sent from Layout component. 
     const { data } = props;
     const initialFormData = Object.freeze({
@@ -79,13 +80,13 @@ export default function FormDialog(props){
   };
 // Set state of Error box
   const handleError = () => {
-		setOpen(true);
+		openSnackBar(true);
 	};
 	  const handleErrorClose = (event, reason) => {
 		if (reason === 'clickaway') {
 		  return;
 		}
-		setOpen(false);
+		openSnackBar(false);
 	  };
 
   return (
@@ -126,7 +127,7 @@ export default function FormDialog(props){
                 />
             </form>
         </DialogContent>
-        <Snackbar open={open} onClose={handleErrorClose}>
+        <Snackbar open={openSnack} onClose={handleErrorClose}>
 						<Alert onClose={handleErrorClose} severity="error">
 							{formData.snackState}
 						</Alert>
