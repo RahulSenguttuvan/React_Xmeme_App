@@ -60,7 +60,7 @@ export default function FormDialog(props){
           window.location.reload(); // Reload page to see change 
         })
         .catch(error => { // Getting appropriate error responses. 
-          handleError();
+          openSnackBar(true);
           updateFormData({
             ...formData,
             ['caption']: formData.caption,
@@ -78,10 +78,6 @@ export default function FormDialog(props){
   const handleClose = () => {
     setOpen(false);
   };
-// Set state of Error box
-  const handleError = () => {
-		openSnackBar(true);
-	};
   const handleErrorClose = (event, reason) => {
   if (reason === 'clickaway') {
     return;
