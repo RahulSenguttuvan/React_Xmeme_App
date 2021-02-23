@@ -47,7 +47,6 @@ export default function FormDialog(props){
     // Display data so user can edit either caption or url or both if needed.
    
     const handleSubmit = (e) => {
-      setOpen(false);
       e.preventDefault();
       // Storing the primary key ( id ) in a variable to append to url 
       const dataId = data.id + '/'
