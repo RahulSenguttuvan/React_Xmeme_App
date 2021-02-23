@@ -57,16 +57,16 @@ export default function FormDialog(props){
           url: formData.url,
         })
         .then(response => { 
-          window.location.reload() // Reload page to see change 
+          window.location.reload(); // Reload page to see change 
         })
         .catch(error => { // Getting appropriate error responses. 
+          handleError();
           updateFormData({
             ...formData,
             ['caption']: formData.caption,
             ['url']: formData.url,
             ['snackState']:error.response.data,
           });
-          handleError()
         });
 	};
 
@@ -82,12 +82,12 @@ export default function FormDialog(props){
   const handleError = () => {
 		openSnackBar(true);
 	};
-	  const handleErrorClose = (event, reason) => {
-		if (reason === 'clickaway') {
-		  return;
-		}
-		openSnackBar(false);
-	  };
+  const handleErrorClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  openSnackBar(false);
+  };
 
   return (
     <div>
@@ -133,10 +133,10 @@ export default function FormDialog(props){
           </Button>
         </DialogActions>
         <Snackbar open={openSnack} onClose={handleErrorClose}>
-		<Alert onClose={handleErrorClose} severity="error">
-			{formData.snackState}
-		</Alert>
-	</Snackbar>
+						<Alert onClose={handleErrorClose} severity="error">
+							{formData.snackState}
+						</Alert>
+				</Snackbar>
       </Dialog>
     </div>
   );
