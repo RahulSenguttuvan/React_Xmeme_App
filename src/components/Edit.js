@@ -25,11 +25,12 @@ export default function FormDialog(props){
     snackState:'',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
-  
+  const existingCaption
+  const existingUrl
   useEffect(() => {
     axiosInstance.get(data.id + '/').then((res) => {
-      const existingCaption = res.data.caption;
-      const existingUrl = res.data.url;
+      existingCaption = res.data.caption;
+      existingUrl = res.data.url;
       updateFormData({
         ...formData,
         'caption': existingCaption,
