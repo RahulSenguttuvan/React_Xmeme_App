@@ -66,7 +66,7 @@ export default function FormDialog(props){
             ['url']: formData.url,
             ['snackState']:error.response.data,
           });
-          handleError
+          handleError()
         });
 	};
 
