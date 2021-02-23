@@ -76,6 +76,7 @@ export default function FormDialog(props){
 
   const handleClose = () => {
     setOpen(false);
+    openSnackBar(false);
   };
   const handleErrorClose = (event, reason) => {
   if (reason === 'clickaway') {
