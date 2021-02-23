@@ -13,7 +13,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+}
 export default function FormDialog(props){
     const [open, setOpen] = useState(false);
     const [openSnack, openSnackBar] = useState(false);
@@ -28,10 +28,12 @@ export default function FormDialog(props){
   
   useEffect(() => {
     axiosInstance.get(data.id + '/').then((res) => {
+      const existingCaption = res.data.caption;
+      const existingUrl = res.data.url;
       updateFormData({
         ...formData,
-        'caption': res.data.caption,
-        'url': res.data.url,
+        'caption': existingCaption,
+        'url': existingUrl,
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,8 +64,8 @@ export default function FormDialog(props){
           openSnackBar(true);
           updateFormData({
             ...formData,
-            ['caption']: formData.caption,
-            ['url']: formData.url,
+            ['caption']: existingCaption,
+            ['url']: existingUrl,
             ['snackState']:error.response.data,
           });
         });
