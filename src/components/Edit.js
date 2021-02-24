@@ -25,20 +25,18 @@ export default function FormDialog(props){
     snackState:'',
 	});
 	const [formData, updateFormData] = useState(initialFormData);
-  const existingCaption
-  const existingUrl
+  
   useEffect(() => {
     axiosInstance.get(data.id + '/').then((res) => {
-      existingCaption = res.data.caption;
-      existingUrl = res.data.url;
       updateFormData({
         ...formData,
-        'caption': existingCaption,
-        'url': existingUrl,
+        ['caption']: res.data.caption,
+        ['url']: res.data.url,
       });
     });
+    console.log("here")
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },  [updateFormData]);      
+  },[formData['snackState'], open]);      
 
     const handleChange = (e) => {
         updateFormData({
@@ -65,8 +63,6 @@ export default function FormDialog(props){
           openSnackBar(true);
           updateFormData({
             ...formData,
-            ['caption']: existingCaption,
-            ['url']: existingUrl,
             ['snackState']:error.response.data,
           });
         });
